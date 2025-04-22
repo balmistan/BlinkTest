@@ -14,7 +14,7 @@ BlinkList::~BlinkList() {
     }
 }
 
-void BlinkList::add(uint8_t gpio) {
+Node* BlinkList::add(uint8_t gpio) {
     Node* newNode = new Node{gpio, nullptr};
 
     if (head == nullptr) {
@@ -26,17 +26,18 @@ void BlinkList::add(uint8_t gpio) {
         }
         current->next = newNode;
     }
+return newNode;
 }
 
-bool BlinkList::search(uint8_t gpio) {
+Node* BlinkList::search(uint8_t gpio) {
     Node* current = head;
     while (current != nullptr) {
         if (current->gpio == gpio) {
-            return true;
+            return current;
         }
         current = current->next;
     }
-    return false;
+    return null;
 }
 
 bool BlinkList::remove(uint8_t gpio) {
@@ -65,7 +66,7 @@ bool BlinkList::remove(uint8_t gpio) {
 void BlinkList::print() {
     Node* current = head;
     while (current != nullptr) {
-        Serial.println(current->value);  // For embedded systems
+        Serial.println(current->gpio);  // For embedded systems
         current = current->next;
     }
 }
