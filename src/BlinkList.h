@@ -6,6 +6,11 @@ class BlinkList {
 private:
     struct Node {
         uint8_t gpio;
+bool enabled;
+bool state;
+unsigned long on_tact;
+unsigned long off_tact;
+unsigned long tact_counter:
         Node* next;
     };
 
