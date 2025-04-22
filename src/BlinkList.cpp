@@ -14,8 +14,8 @@ BlinkList::~BlinkList() {
     }
 }
 
-void BlinkList::add(int value) {
-    Node* newNode = new Node{value, nullptr};
+void BlinkList::add(uint8_t gpio) {
+    Node* newNode = new Node{gpio, nullptr};
 
     if (head == nullptr) {
         head = newNode;
@@ -28,10 +28,10 @@ void BlinkList::add(int value) {
     }
 }
 
-bool BlinkList::search(int value) {
+bool BlinkList::search(uint8_t gpio) {
     Node* current = head;
     while (current != nullptr) {
-        if (current->value == value) {
+        if (current->gpio == gpio) {
             return true;
         }
         current = current->next;
@@ -39,10 +39,10 @@ bool BlinkList::search(int value) {
     return false;
 }
 
-bool BlinkList::remove(int value) {
+bool BlinkList::remove(uint8_t gpio) {
     if (head == nullptr) return false;
 
-    if (head->value == value) {
+    if (head->gpio == gpio) {
         Node* temp = head;
         head = head->next;
         delete temp;
@@ -50,7 +50,7 @@ bool BlinkList::remove(int value) {
     }
 
     Node* current = head;
-    while (current->next != nullptr && current->next->value != value) {
+    while (current->next != nullptr && current->next->gpio != gpio) {
         current = current->next;
     }
 
