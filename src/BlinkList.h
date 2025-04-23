@@ -20,7 +20,7 @@ public:
     BlinkList();                 // Constructor
     ~BlinkList();                // Destructor
 
-    Node* add(uint8_t gpio);         // Add a value to the end
+      Node* configure(uint8_t gpio, unsigned long t_on_ms, unsigned long t_off_ms     // Add a new node to the end and configure  it
     Node* search(uint8_t gpio);      // Search for a value
     bool remove(uint8_t gpio);      // Remove a node by value
     void print();                // Print all elements (for debug)
