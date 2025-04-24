@@ -15,6 +15,7 @@ unsigned long tact_counter:
     };
 
     Node* head;
+Node* last;
 
 public:
     BlinkList();                 // Constructor
