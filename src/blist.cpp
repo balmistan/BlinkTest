@@ -16,7 +16,11 @@ return nullptr;
 }
 
 BNode* addBNodeIfNotExists(uint8_t gpio){
-//BNode* tmp = 
+BNode* tmp = searchBNode(gpio);
+if(tmp == nullptr){
+   tmp = createBNode(gpio);
+}
+return tmp;
 }
 
 BNode* BList::addBNode(uint8_t gpio)
