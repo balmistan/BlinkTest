@@ -12,7 +12,8 @@ private:
 public:
     BList();
 BNode* searchBNode(uint8_t gpio);
-    void addBNode(uint8_t gpio);
+BNode* addBNode(uint8_t gpio);
+BNode* addBNodeIfNotExists(uint8_t gpio);
 void removeBNode(uint8_t gpio);
     void print();  //only for debug
     ~BList();
