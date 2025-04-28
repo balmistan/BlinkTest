@@ -12,6 +12,7 @@ private:
 public:
     BList();
     void addBNode(uint8_t gpio);
+void rem
     void print();  //only for debug
     ~BList();
 };
