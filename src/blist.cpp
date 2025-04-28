@@ -29,7 +29,7 @@ BList::~BList()
     }
 }
 
-BList::BNodeRemove(uint8_t gpio){
+BList::RemoveBNode(uint8_t gpio){
 BNode* pt = head;
 while(pt != nullptr){
   if(pt->gpio == gpio){
