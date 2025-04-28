@@ -15,7 +15,11 @@ return tmp;
 return nullptr;
 }
 
-void BList::addBNode(uint8_t gpio)
+BNode* addBNodeIfNotExists(uint8_t gpio){
+
+}
+
+BNode* BList::addBNode(uint8_t gpio)
 {
     BNode *newbnode = new BNode(gpio);
     if (head == nullptr)
@@ -26,6 +30,7 @@ void BList::addBNode(uint8_t gpio)
     {
         last = newbnode;
     }
+return newbnode;
 }
 
 BList::~BList()
