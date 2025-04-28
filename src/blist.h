@@ -11,6 +11,7 @@ private:
     BNode* last;
 public:
     BList();
+BNode* searchBNode(uint8_t gpio);
     void addBNode(uint8_t gpio);
 void removeBNode(uint8_t gpio);
     void print();  //only for debug
