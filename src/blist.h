@@ -11,12 +11,19 @@ private:
     BNode* last;
 public:
     BList();
+void print();  //only for debug
+
+void configureBlink(uint8_t gpio, unsigned long ms_on, unsigned long ms_off);
+
+
+    ~BList();
+
+private:
 BNode* searchBNode(uint8_t gpio);
 BNode* addBNode(uint8_t gpio);
 BNode* addBNodeIfNotExists(uint8_t gpio);
 void removeBNode(uint8_t gpio);
-    void print();  //only for debug
-    ~BList();
+    
 };
 
 #endif
