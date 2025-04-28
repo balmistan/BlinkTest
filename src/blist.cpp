@@ -28,3 +28,10 @@ BList::~BList()
         delete temp;
     }
 }
+
+BList::BNodeRemove(uint8_t gpio){
+BNode* pt = head;
+while(pt != nullptr){
+  if()
+}
+}
