@@ -8,8 +8,8 @@ public:
     uint8_t gpio;
     bool enabled;
     bool state;
-    unsigned long on_tact;
-    unsigned long off_tact;
+    unsigned long tact_on;
+    unsigned long tact_off;
     unsigned long tact_counter;
     BNode *next;
 
