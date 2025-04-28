@@ -2,7 +2,7 @@
 
 Lista::Lista()
 {
-    testa = nullptr;
+    head = nullptr;
 }
 
 void BList::addBNode(uint8_t gpio)
