@@ -5,6 +5,17 @@ Lista::Lista()
     head = nullptr;
 }
 
+BNode* searchBNode(uint8_t gpio){
+  BNode* tmp = head;
+  while(tmp != nullptr){
+   if(tmp->gpio == gpio
+){
+
+}
+}
+return nullptr;
+}
+
 void BList::addBNode(uint8_t gpio)
 {
     BNode *newbnode = new BNode(gpio);
