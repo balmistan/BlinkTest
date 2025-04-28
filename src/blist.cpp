@@ -8,9 +8,8 @@ Lista::Lista()
 BNode* searchBNode(uint8_t gpio){
   BNode* tmp = head;
   while(tmp != nullptr){
-   if(tmp->gpio == gpio
-){
-
+   if(tmp->gpio == gpio){
+return tmp;
 }
 }
 return nullptr;
