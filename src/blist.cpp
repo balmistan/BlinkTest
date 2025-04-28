@@ -32,6 +32,10 @@ BList::~BList()
 BList::BNodeRemove(uint8_t gpio){
 BNode* pt = head;
 while(pt != nullptr){
-  if()
+  if(pt->gpio == gpio){
+    BNode* pt2 = pt;
+    free(pt);
+    pt = pt2->next;
+}
 }
 }
