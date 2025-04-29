@@ -58,3 +58,13 @@ while(pt != nullptr){
 }
 }
 }
+
+void BList::print() {
+    Node* current = head;
+    while (current != nullptr) {
+// For embedded systems
+Serial.print("gpio: ");    Serial.println(current->gpio);  
+
+        current = current->next;
+    }
+}
