@@ -11,7 +11,7 @@ public:
     unsigned long tact_on;
     unsigned long tact_off;
     unsigned long tact_counter;
-    BNode *next;
+    BNode* next;
 
     BNode(uint8_t gpio);
 };

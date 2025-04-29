@@ -1,41 +1,90 @@
 #include "blist.h"
 
-Lista::Lista()
+BList::BList()
 {
     head = nullptr;
+    last = nullptr;
 }
 
-BNode* searchBNode(uint8_t gpio){
-  BNode* tmp = head;
-  while(tmp != nullptr){
-   if(tmp->gpio == gpio){
-return tmp;
-}
-}
-return nullptr;
-}
-
-BNode* addBNodeIfNotExists(uint8_t gpio){
-BNode* tmp = searchBNode(gpio);
-if(tmp == nullptr){
-   tmp = createBNode(gpio);
-}
-return tmp;
-}
-
-BNode* BList::addBNode(uint8_t gpio)
+BNode *BList::addBNode(uint8_t gpio)
 {
     BNode *newbnode = new BNode(gpio);
     if (head == nullptr)
     {
         head = newbnode;
+        last = newbnode;
     }
     else
     {
+        last->next = newbnode;
         last = newbnode;
     }
-return newbnode;
+    return newbnode;
 }
+
+BNode *BList::searchBNode(uint8_t gpio)
+{
+    BNode *current = head;
+    while (current != nullptr)
+    {
+        if (current->gpio == gpio)
+        {
+            return current;
+        }
+        current = current->next;
+    }
+    return nullptr;
+}
+
+BNode *BList::addBNodeIfNotExists(uint8_t gpio)
+{
+    BNode *pt = searchBNode(gpio);
+    if (pt == nullptr)
+    {
+        pt = addBNode(gpio);
+    }
+    return pt;
+}
+
+bool BList::removeBNode(uint8_t gpio)
+{
+    BNode *current = head;
+    BNode *prev = head;
+    bool deleted = false;
+    while (current != nullptr)
+    {
+        if (current->gpio == gpio)
+        {
+            prev->next = current->next;
+            free(current);
+            current = nullptr;
+            deleted = true;
+            break;
+        }
+        else
+        {
+            prev = current;
+            current = current->next;
+        }
+    }
+    return deleted;
+}
+
+void BList::configureBlink(uint8_t gpio, unsigned long ms_on, unsigned long ms_off){
+ BNode* pt = addBNodeIfNotExists(gpio);
+ pt -> tact_on = ms_on / 10;
+ pt -> tact_off = ms_off / 10;
+}
+
+
+void BList::print() {
+    BNode* current = head;
+    while (current != nullptr) {
+        Serial.println(current->gpio);  // For embedded systems
+        current = current->next;
+    }
+}
+
 
 BList::~BList()
 {
@@ -45,26 +94,5 @@ BList::~BList()
         BNode *temp = current;
         current = current->next;
         delete temp;
-    }
-}
-
-BList::removeBNode(uint8_t gpio){
-BNode* pt = head;
-while(pt != nullptr){
-  if(pt->gpio == gpio){
-    BNode* pt2 = pt;
-    free(pt);
-    pt = pt2->next;
-}
-}
-}
-
-void BList::print() {
-    Node* current = head;
-    while (current != nullptr) {
-// For embedded systems
-Serial.print("gpio: ");    Serial.println(current->gpio);  
-
-        current = current->next;
     }
 }
