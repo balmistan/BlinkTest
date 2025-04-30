@@ -17,6 +17,12 @@ public:
 
     void configureBlink(uint8_t gpio, unsigned long ms_on, unsigned long ms_off);
 
+void startBlink(uint8_t gpio);
+void stopBlink(uint8_t gpio, bool endstate);
+void stopBlink(uint8_t gpio);
+void removeBlink(uint8_t gpio, bool endstate);
+void removeBlink(uint8_t gpio);
+
     ~BList();
 
 private:
