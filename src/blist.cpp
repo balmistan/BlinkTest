@@ -76,6 +76,11 @@ void BList::configureBlink(uint8_t gpio, unsigned long ms_on, unsigned long ms_o
  pt -> tact_off = ms_off / 10;
 }
 
+void BList::startBlink(uint8_t gpio){
+BNode* pt = addBNodeIfNotExists(gpio);
+pt -> state = 
+}
+
 
 void BList::print() {
     BNode* current = head;
