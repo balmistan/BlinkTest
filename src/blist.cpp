@@ -79,10 +79,16 @@ void BList::configureBlink(uint8_t gpio, unsigned long ms_on, unsigned long ms_o
 void BList::startBlink(uint8_t gpio){
 BNode* pt = addBNodeIfNotExists(gpio);
 pt -> state = digitalRead(gpio);
-tact_counter = pt -> state ? 
+pt -> tact_counter = pt -> state ? 
    tact_on : tact_off;
+pt -> enabled = true;
+}
 
-
+void BList::stopBlink(uint8_t gpio, bool endstate){
+  BNode* pt = addBNodeIfNotExists(gpio);
+ pt -> enabled = false;
+ digitalWrite(gpio, endvalue);
+}
 
 void BList::print() {
     BNode* current = head;
