@@ -95,7 +95,14 @@ void BList::stopBlink(uint8_t gpio){
  pt -> enabled = false;
 }
 
+void BList::removeBlink(uint8_t gpio, bool endstate){
+digitalWrite(gpio, endstate);
+removeBNode(gpio);
+}
 
+void BList::removeBlink(uint8_t gpio){
+removeBNode(gpio);
+}
 
 void BList::print() {
     BNode* current = head;
