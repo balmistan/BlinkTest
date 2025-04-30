@@ -90,6 +90,13 @@ void BList::stopBlink(uint8_t gpio, bool endstate){
  digitalWrite(gpio, endvalue);
 }
 
+void BList::stopBlink(uint8_t gpio){
+  BNode* pt = addBNodeIfNotExists(gpio);
+ pt -> enabled = false;
+}
+
+
+
 void BList::print() {
     BNode* current = head;
     while (current != nullptr) {
