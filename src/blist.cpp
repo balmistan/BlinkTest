@@ -78,8 +78,10 @@ void BList::configureBlink(uint8_t gpio, unsigned long ms_on, unsigned long ms_o
 
 void BList::startBlink(uint8_t gpio){
 BNode* pt = addBNodeIfNotExists(gpio);
-pt -> state = 
-}
+pt -> state = digitalRead(gpio);
+tact_counter = pt -> state ? 
+   tact_on : tact_off;
+
 
 
 void BList::print() {
