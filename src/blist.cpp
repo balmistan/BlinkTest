@@ -121,6 +121,22 @@ current = current->next;
 }
 }
 
+BList::change_gpio_state(){
+   BNode *current = head;
+     while (current != nullptr)
+    {
+   if(current->enabled && !current->tact_counter){
+  current->state = !current->state; 
+digitalWrite(gpio, current->state)
+if(current->state)
+ current->tact_counter = current->tact_on;
+}else{
+  current->tact_counter = current->tact_off;
+}
+current = current->next;
+}
+}
+
 BList::~BList()
 {
     BNode *current = head;
