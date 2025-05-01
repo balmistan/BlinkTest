@@ -116,7 +116,7 @@ BList::interrupt_check(){
    BNode *current = head;
      while (current != nullptr)
     {
-current -> tact_counter = !tact_counter ? 0 : (current->tact_counter - 1);
+current -> tact_counter = !current->tact_counter ? 0 : (current->tact_counter - 1);
 current = current->next;
 }
 }
