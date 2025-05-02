@@ -23,7 +23,7 @@ Node* BlinkList::add(uint8_t gpio) {
 }
 }
 
-Node* BlinkList::configure(uint8_t gpio, unsigned long t_on_ms, unsigned long t_off_ms) {
+Node* BlinkList::configure(uint8_t gpio, unsigned int t_on_ms, unsigned int t_off_ms) {
     Node* newNode = new Node{gpio, nullptr};
 
     if (head == nullptr) {

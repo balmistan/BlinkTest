@@ -70,71 +70,83 @@ bool BList::removeBNode(uint8_t gpio)
     return deleted;
 }
 
-void BList::configureBlink(uint8_t gpio, unsigned long ms_on, unsigned long ms_off){
- BNode* pt = addBNodeIfNotExists(gpio);
- pt -> tact_on = ms_on / 10;
- pt -> tact_off = ms_off / 10;
+void BList::configureBlink(uint8_t gpio, unsigned int ms_on, unsigned int ms_off)
+{
+    BNode *pt = addBNodeIfNotExists(gpio);
+    pt->tact_on = ms_on / 10;
+    pt->tact_off = ms_off / 10;
 }
 
-void BList::startBlink(uint8_t gpio){
-BNode* pt = addBNodeIfNotExists(gpio);
-pt -> state = digitalRead(gpio);
-pt -> tact_counter = pt -> state ? 
-   tact_on : tact_off;
-pt -> enabled = true;
+void BList::startBlink(uint8_t gpio)
+{
+    BNode *pt = addBNodeIfNotExists(gpio);
+    pt->state = digitalRead(gpio);
+    pt->tact_counter = pt->state ? pt->tact_on : pt->tact_off;
+    pt->enabled = true;
 }
 
-void BList::stopBlink(uint8_t gpio, bool endstate){
-  BNode* pt = addBNodeIfNotExists(gpio);
- pt -> enabled = false;
- digitalWrite(gpio, endvalue);
+void BList::stopBlink(uint8_t gpio, bool endstate)
+{
+    BNode *pt = addBNodeIfNotExists(gpio);
+    pt->enabled = false;
+    digitalWrite(gpio, endstate);
 }
 
-void BList::stopBlink(uint8_t gpio){
-  BNode* pt = addBNodeIfNotExists(gpio);
- pt -> enabled = false;
+void BList::stopBlink(uint8_t gpio)
+{
+    BNode *pt = addBNodeIfNotExists(gpio);
+    pt->enabled = false;
 }
 
-void BList::removeBlink(uint8_t gpio, bool endstate){
-digitalWrite(gpio, endstate);
-removeBNode(gpio);
+void BList::clearBlink(uint8_t gpio, bool endstate)
+{
+    digitalWrite(gpio, endstate);
+    removeBNode(gpio);
 }
 
-void BList::removeBlink(uint8_t gpio){
-removeBNode(gpio);
+void BList::clearBlink(uint8_t gpio)
+{
+    removeBNode(gpio);
 }
 
-void BList::print() {
-    BNode* current = head;
-    while (current != nullptr) {
-        Serial.println(current->gpio);  // For embedded systems
+void BList::print()
+{
+    BNode *current = head;
+    while (current != nullptr)
+    {
+        Serial.println(current->gpio); // For embedded systems
         current = current->next;
     }
 }
 
-BList::interrupt_check(){
-   BNode *current = head;
-     while (current != nullptr)
+void BList::interruptCheck()
+{
+    BNode *current = head;
+    while (current != nullptr)
     {
-current -> tact_counter = !current->tact_counter ? 0 : (current->tact_counter - 1);
-current = current->next;
-}
+        current->tact_counter = !current->tact_counter ? 0 : (current->tact_counter - 1);
+        current = current->next;
+    }
 }
 
-BList::change_gpio_state(){
-   BNode *current = head;
-     while (current != nullptr)
+void BList::changeGpioState()
+{
+    BNode *current = head;
+    while (current != nullptr)
     {
-   if(current->enabled && !current->tact_counter){
-  current->state = !current->state; 
-digitalWrite(gpio, current->state)
-if(current->state)
- current->tact_counter = current->tact_on;
-}else{
-  current->tact_counter = current->tact_off;
-}
-current = current->next;
-}
+        if (current->enabled && !current->tact_counter)
+        {
+            current->state = !current->state;
+            digitalWrite(current->enabled, current->state);
+            if (current->state)
+                current->tact_counter = current->tact_on;
+        }
+        else
+        {
+            current->tact_counter = current->tact_off;
+        }
+        current = current->next;
+    }
 }
 
 BList::~BList()
