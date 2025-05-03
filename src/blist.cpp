@@ -42,6 +42,15 @@ BNode *BList::addBNodeIfNotExists(uint8_t gpio)
     if (pt == nullptr)
     {
         pt = addBNode(gpio);
+        if (pt == nullptr)
+        {
+            Serial.println("The method addNode has returned a nullptr!!!");
+        }
+        else
+        {
+            Serial.print("The method addNode has setted the gpio number ");
+            Serial.println(pt->gpio);
+        }
     }
     return pt;
 }
@@ -114,7 +123,25 @@ void BList::print()
     BNode *current = head;
     while (current != nullptr)
     {
-        Serial.println(current->gpio); // For embedded systems
+        // For embedded systems
+        Serial.print("gpio: ");
+        Serial.println(current->gpio);
+
+        Serial.print("enabled: ");
+        Serial.println(current->enabled);
+
+        Serial.print("led state: ");
+        Serial.println(current->state);
+
+        Serial.print("tact_on: ");
+        Serial.println(current->tact_on);
+
+        Serial.print("tact_off: ");
+        Serial.println(current->tact_on);
+
+        Serial.print("tact_counter: ");
+        Serial.println(current->tact_counter);
+
         current = current->next;
     }
 }
@@ -124,8 +151,12 @@ void BList::interruptCheck()
     BNode *current = head;
     while (current != nullptr)
     {
-        current->tact_counter = !current->tact_counter ? 0 : (current->tact_counter - 1);
+        if (current->enabled)
+        {
+            current->tact_counter = !current->tact_counter ? 0 : (current->tact_counter - 1);
+        }
         current = current->next;
+
     }
 }
 
@@ -137,7 +168,7 @@ void BList::changeGpioState()
         if (current->enabled && !current->tact_counter)
         {
             current->state = !current->state;
-            digitalWrite(current->enabled, current->state);
+            digitalWrite(current->gpio, current->state);
             if (current->state)
                 current->tact_counter = current->tact_on;
         }
