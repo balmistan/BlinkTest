@@ -1,8 +1,10 @@
 #include <Arduino.h>
+#include <Ticker.h>
 #include "blist.h"
 
 #define GPIOOUT 5
 
+Ticker timer;
 BList list;
 
 void setup() {
