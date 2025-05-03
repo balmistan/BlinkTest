@@ -21,5 +21,4 @@ void ICACHE_RAM_ATTR onTimer() {
 
 
 void loop() {
-    // Your loop logic here
-}
+    list.changeGpioState();
