@@ -16,7 +16,7 @@ void setup() {
 }
 
 void ICACHE_RAM_ATTR onTimer() {
-  updatestatelist();  //update interrupt management list
+  list.interruptCheck();  //update interrupt management list
 }
 
 
