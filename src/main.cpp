@@ -15,6 +15,9 @@ void setup() {
     list.startBlink(GPIOOUT);
 }
 
+void ICACHE_RAM_ATTR onTimer() {
+  updatestatelist();  //update interrupt management list
+}
 
 
 void loop() {
