@@ -151,9 +151,9 @@ void BList::interruptCheck()
     BNode *current = head;
     while (current != nullptr)
     {
-        if (current->enabled)
+        if (current->enabled && current->tact_counter)
         {
-            current->tact_counter = !current->tact_counter ? 0 : (current->tact_counter - 1);
+            current->tact_counter = current->tact_counter - 1;
         }
         current = current->next;
 
