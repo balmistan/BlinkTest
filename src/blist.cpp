@@ -156,7 +156,6 @@ void BList::interruptCheck()
             current->tact_counter--;
         }
         current = current->next;
-
     }
 }
 
@@ -165,16 +164,18 @@ void BList::changeGpioState()
     BNode *current = head;
     while (current != nullptr)
     {
-        if (current->enabled && !current->tact_counter)
+        if (current->enabled && current->tact_counter == 0)
         {
             current->state = !current->state;
             digitalWrite(current->gpio, current->state);
-            if (current->state){
+            if (current->state)
+            {
                 current->tact_counter = current->tact_on;
-        }
-        else
-        {
-            current->tact_counter = current->tact_off;
+            }
+            else
+            {
+                current->tact_counter = current->tact_off;
+            }
         }
         current = current->next;
     }
