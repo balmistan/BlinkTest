@@ -153,7 +153,7 @@ void BList::interruptCheck()
     {
         if (current->enabled && current->tact_counter)
         {
-            current->tact_counter = current->tact_counter - 1;
+            current->tact_counter--;
         }
         current = current->next;
 
@@ -169,7 +169,7 @@ void BList::changeGpioState()
         {
             current->state = !current->state;
             digitalWrite(current->gpio, current->state);
-            if (current->state)
+            if (current->state){
                 current->tact_counter = current->tact_on;
         }
         else
